@@ -1,0 +1,13 @@
+{
+  "questions": [
+    "The breakout star of Coachella this year was a _________colored puppet.",
+    "Their swag was insane. They were dressed (like a/in a) ________.",
+    "They played on the (tent or main)______________stage."
+  ],
+  "finalThumbnailText": "Saved! Thanks for playing FIB",
+  "prompt": "An award-winning animated photograph of a key1 puppet that is entirely the color key1, dressed in a stylish key2 outfit, performing on the key3 stage at Coachella, motion shot, cinematic, highly detailed, 4k",
+  "style": {
+    "bgColor": "linear-gradient(to bottom, #dbf4ff, #efefef)",
+    "fontStyle": "Outfit"
+  }
+}

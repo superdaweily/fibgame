@@ -1,0 +1,13 @@
+{
+  "questions": [
+    "At Farcon the beach was filled with __________?",
+    "The water was the color  __________!",
+    "The photo I took was in the style of______________?"
+  ],
+  "finalThumbnailText": "Saved! Thanks for playing FIB",
+  "prompt": "A cinematic still from a film of Venice Beach California filled with realistic oversized key1. They water and waves have been turned the color key2, The beach is filled with people and the image is created in stereotypical key3 style. motion shot, highly detailed, crispy, 4k, glossy",
+  "style": {
+    "bgColor": "linear-gradient(to bottom, #dbf4ff, #efefef)",
+    "fontStyle": "Outfit"
+  }
+}

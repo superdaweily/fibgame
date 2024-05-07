@@ -1,0 +1,27 @@
+{
+  "name": "@repo/utils",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./getResponse": "./src/get-response.ts",
+    "./generate-image": "./lib/generate-image.ts",
+    "./generate-prompt": "./lib/generate-prompt.ts",
+    "./save-image": "./lib/save-image.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@coinbase/onchainkit": "^0.11.0",
+    "@fal-ai/serverless-client": "^0.9.0",
+    "@farcaster/hub-nodejs": "^0.11.11",
+    "@noble/curves": "^1.4.0",
+    "next": "^14.2.3",
+    "react": "^18.3.1",
+    "typescript": "^5.3.3",
+    "viem": "^2.9.32"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1"
+  }
+}
