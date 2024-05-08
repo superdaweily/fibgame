@@ -70,7 +70,6 @@ export async function getResponse(
       data.state = JSON.parse(decodeURIComponent(message?.state.serialized!));
     }
     data.state[index] = message?.input;
-
     return new NextResponse(getFrameHtmlResponse(data));
   } else if (index == num) {
     const title = "Ready to make a story!";
@@ -127,7 +126,6 @@ export async function getResponse(
         status: 500,
       });
     }
-    //
   } else if (index == num + 2 && imageUrl) {
     // save image step
     const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
