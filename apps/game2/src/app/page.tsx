@@ -8,8 +8,8 @@ const frameMetadata = getFrameMetadata({
       label: "Play FIB",
     },
   ],
-  image: `${process.env.NEXT_PUBLIC_SITE_URL}/thumbnail.png`,
-  postUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/api/generate`,
+  image: `${process.env.SITE_URL}/thumbnail.png`,
+  postUrl: `${process.env.SITE_URL}/api/generate`,
 });
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FIB - fill in the basket!",
     description: "LFG",
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/thumbnail.png`],
+    images: [`${process.env.SITE_URL}/thumbnail.png`],
   },
   other: {
     ...frameMetadata,

@@ -40,10 +40,10 @@ export async function getResponse(
         ],
         input: { text: "Write your option" },
         image: {
-          src: `${process.env.NEXT_PUBLIC_SITE_URL}/og?title=${questions[questionIndex]}`,
+          src: `${process.env.SITE_URL}/og?title=${questions[questionIndex]}`,
         },
         postUrl: `${
-          process.env.NEXT_PUBLIC_SITE_URL
+          process.env.SITE_URL
         }/api/generate?title=${questions[questionIndex]}&questionIndex=${questionIndex + 1}&questionNum=${questionNum}`,
         state: {},
       })
@@ -58,10 +58,10 @@ export async function getResponse(
       ],
       input: { text: "Write your option" },
       image: {
-        src: `${process.env.NEXT_PUBLIC_SITE_URL}/og?title=${questions[index]}`,
+        src: `${process.env.SITE_URL}/og?title=${questions[index]}`,
       },
       postUrl: `${
-        process.env.NEXT_PUBLIC_SITE_URL
+        process.env.SITE_URL
       }/api/generate?title=${questions[index]}&questionIndex=${index + 1}&questionNum=${num}`,
       state: {},
     };
@@ -81,10 +81,10 @@ export async function getResponse(
         },
       ],
       image: {
-        src: `${process.env.NEXT_PUBLIC_SITE_URL}/og?title=${encodeURI(title)}`,
+        src: `${process.env.SITE_URL}/og?title=${encodeURI(title)}`,
       },
       postUrl: `${
-        process.env.NEXT_PUBLIC_SITE_URL
+        process.env.SITE_URL
       }/api/generate?questionIndex=${index + 1}&questionNum=${num}`,
       state: {},
     };
@@ -110,7 +110,7 @@ export async function getResponse(
             aspectRatio: "1:1",
           },
           postUrl: `${
-            process.env.NEXT_PUBLIC_SITE_URL
+            process.env.SITE_URL
           }/api/generate?questionIndex=${index + 1}&questionNum=${num}&imgUrl=${encodeURI(fal_res.imageUrl)}`,
           state: {
             imgUrl: fal_res.imageUrl,
@@ -141,10 +141,10 @@ export async function getResponse(
             },
           ],
           image: {
-            src: `${process.env.NEXT_PUBLIC_SITE_URL}/og?title=${finalThumbnailText}`,
+            src: `${process.env.SITE_URL}/og?title=${finalThumbnailText}`,
           },
           postUrl: `${
-            process.env.NEXT_PUBLIC_SITE_URL
+            process.env.SITE_URL
           }/api/generate?title=${finalThumbnailText}&questionIndex=${index + 1}&questionNum=${num}&imgUrl=${encodeURI(imageUrl)}`,
         }),
         {
@@ -172,7 +172,7 @@ export async function getResponse(
         aspectRatio: "1:1",
       },
       postUrl: `${
-        process.env.NEXT_PUBLIC_SITE_URL
+        process.env.SITE_URL
       }/api/generate?title=${questions[index]}&questionIndex=${index + 1}&questionNum=${num}`,
       state: {},
     };
