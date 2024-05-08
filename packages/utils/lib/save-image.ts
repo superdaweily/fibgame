@@ -1,4 +1,5 @@
 export const saveImage = async (imgUrl: string, fid: any) => {
+  console.log("It's about to sent a request.");
   try {
     const body = {
       pinataContent: {
@@ -27,7 +28,8 @@ export const saveImage = async (imgUrl: string, fid: any) => {
       options
     );
     if (res.ok) {
-      const data = await res.json();
+      // const data = await res.json();
+
       return { msg: "Success" };
     } else {
       return { msg: "Error" };

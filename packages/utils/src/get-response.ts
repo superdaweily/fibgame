@@ -111,7 +111,7 @@ export async function getResponse(
           },
           postUrl: `${
             process.env.SITE_URL
-          }/api/generate?questionIndex=${index + 1}&questionNum=${num}&imgUrl=${encodeURI(fal_res.imageUrl)}`,
+          }/api/generate?questionIndex=${index + 1}&questionNum=${num}`,
           state: {
             imgUrl: fal_res.imageUrl,
           },
@@ -126,13 +126,14 @@ export async function getResponse(
         status: 500,
       });
     }
-  } else if (index == num + 2 && imageUrl) {
+  } else if (index == num + 2) {
     // save image step
     const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
     const imgUrl = state.imgUrl;
     const fid = message?.interactor.fid;
     const res_pinna: any = await saveImage(imgUrl, fid);
     if (res_pinna.msg == "Success") {
+      console.log("Successfully saved!");
       return new NextResponse(
         getFrameHtmlResponse({
           buttons: [
@@ -146,10 +147,7 @@ export async function getResponse(
           postUrl: `${
             process.env.SITE_URL
           }/api/generate?title=${finalThumbnailText}&questionIndex=${index + 1}&questionNum=${num}&imgUrl=${encodeURI(imageUrl)}`,
-        }),
-        {
-          status: 500,
-        }
+        })
       );
     } else {
       return new NextResponse(JSON.stringify({ error: "Sever error" }), {
