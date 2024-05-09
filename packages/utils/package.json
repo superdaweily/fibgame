@@ -6,7 +6,8 @@
     "./getResponse": "./src/get-response.ts",
     "./generate-image": "./lib/generate-image.ts",
     "./generate-prompt": "./lib/generate-prompt.ts",
-    "./save-image": "./lib/save-image.ts"
+    "./save-image": "./lib/save-image.ts",
+    "./add-cast": "./lib/add-cast.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0"
@@ -16,6 +17,8 @@
     "@fal-ai/serverless-client": "^0.9.0",
     "@farcaster/hub-nodejs": "^0.11.11",
     "@noble/curves": "^1.4.0",
+    "@noble/ed25519": "^2.1.0",
+    "@noble/hashes": "^1.4.0",
     "next": "^14.2.3",
     "react": "^18.3.1",
     "typescript": "^5.3.3",

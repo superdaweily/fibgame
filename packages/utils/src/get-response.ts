@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 import { generateImage } from "../lib/generate-image";
 import { saveImage } from "../lib/save-image";
 import { generateFinalPrompt } from "../lib/generate-prompt";
+import { addCast } from "../lib/add-cast";
 
 export async function getResponse(
   body: FrameRequest,
@@ -133,7 +134,6 @@ export async function getResponse(
     const fid = message?.interactor.fid;
     const res_pinna: any = await saveImage(imgUrl, fid);
     if (res_pinna.msg == "Success") {
-      console.log("Successfully saved!");
       return new NextResponse(
         getFrameHtmlResponse({
           buttons: [
@@ -146,7 +146,11 @@ export async function getResponse(
           },
           postUrl: `${
             process.env.SITE_URL
-          }/api/generate?title=${finalThumbnailText}&questionIndex=${index + 1}&questionNum=${num}&imgUrl=${encodeURI(imageUrl)}`,
+          }/api/generate?title=${finalThumbnailText}&questionIndex=${index + 1}&questionNum=${num}&imgUrl=${encodeURI(imgUrl)}`,
+          state: {
+            msg: message?.input,
+            imgUrl: imgUrl,
+          },
         })
       );
     } else {
@@ -155,23 +159,38 @@ export async function getResponse(
       });
     }
   } else if (index == num + 3) {
-    //share on warpcast
-    const data: any = {
-      buttons: [
-        {
-          action: "link",
-          label: "Send a cast",
-          target: `https://warpcast.com/~/add-cast-action?actionType=post&name=ThisISTest&icon=clock&postUrl=https%3A%2F%2Ftest-cast-actions.vercel.app%2Fapi%2Faction`,
+    return new NextResponse(
+      getFrameHtmlResponse({
+        buttons: [
+          {
+            label: `Cast`,
+          },
+        ],
+        input: { text: "Write a notes." },
+        image: {
+          src: imageUrl,
         },
-      ],
-      input: { text: "Write a message." },
+        postUrl: `${
+          process.env.SITE_URL
+        }/api/generate?questionIndex=${index + 1}&questionNum=${num}`,
+        state: {
+          msg: message?.input,
+        },
+      })
+    );
+  } else if (index == num + 4) {
+    const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
+    const imgUrl = state.imgUrl;
+    const msg = state.msg;
+    const fid: number = message?.interactor.fid!;
+    console.log("fid", fid);
+    //share on warpcast
+    // addCast();
+    const title = "Thanks for your cast!";
+    const data: any = {
       image: {
-        src: imageUrl,
-        aspectRatio: "1:1",
+        src: `${process.env.SITE_URL}/og?title=${encodeURI(title)}`,
       },
-      postUrl: `${
-        process.env.SITE_URL
-      }/api/generate?title=${questions[index]}&questionIndex=${index + 1}&questionNum=${num}`,
       state: {},
     };
     return new NextResponse(getFrameHtmlResponse(data));

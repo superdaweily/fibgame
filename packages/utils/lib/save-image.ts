@@ -1,5 +1,4 @@
 export const saveImage = async (imgUrl: string, fid: any) => {
-  console.log("It's about to sent a request.");
   try {
     const body = {
       pinataContent: {
