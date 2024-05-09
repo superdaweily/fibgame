@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 import { generateImage } from "../lib/generate-image";
 import { saveImage } from "../lib/save-image";
 import { generateFinalPrompt } from "../lib/generate-prompt";
-import { addCast } from "../lib/add-cast";
+// import { addCast } from "../lib/add-cast";
 
 export async function getResponse(
   body: FrameRequest,
