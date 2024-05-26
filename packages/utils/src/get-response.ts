@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 import { generateImage } from "../lib/generate-image";
 import { saveImage } from "../lib/save-image";
 import { generateFinalPrompt } from "../lib/generate-prompt";
-// import { addCast } from "../lib/add-cast";
+import { addCast } from "../lib/add-cast";
 
 export async function getResponse(
   body: FrameRequest,
@@ -164,15 +164,13 @@ export async function getResponse(
         buttons: [
           {
             label: `Cast`,
+            target: "https://warpcast.com/~/compose?text=Hello%20world!",
           },
         ],
         input: { text: "Write a notes." },
         image: {
           src: imageUrl,
         },
-        postUrl: `${
-          process.env.SITE_URL
-        }/api/generate?questionIndex=${index + 1}&questionNum=${num}`,
         state: {
           msg: message?.input,
         },
@@ -185,7 +183,22 @@ export async function getResponse(
     const fid: number = message?.interactor.fid!;
     console.log("fid", fid);
     //share on warpcast
-    // addCast();
+    addCast();
+
+    // const options = {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: `Bearer ${process.env.PINATA_API_KEY}`,
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: `{"castAddBody":{"text":"${msg}","parentUrl":${process.env.PARENT_URL},"embeds":[{"url":"<string>","castId":{"fid":123,"hash":"<string>"}}],,"mentions":[123],"mentionsPositions":[],"parentCastId":{"fid":${process.env.FID}}},"signerId":${process.env.PRIVATE_KEY}}`,
+    // };
+
+    // fetch("https://api.pinata.cloud/v3/farcaster/casts", options)
+    //   .then((response) => response.json())
+    //   .then((response) => console.log(response))
+    //   .catch((err) => console.error(err));
+
     const title = "Thanks for your cast!";
     const data: any = {
       image: {
