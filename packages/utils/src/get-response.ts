@@ -139,7 +139,7 @@ export async function getResponse(
             {
               action: "link",
               label: `Share on Warpcast`,
-              target: `https://warpcast.com/~/compose?text=https://iconparkorlando.com/bc/wp-content/uploads/The-Easter-Bunny-Garden-Experience-2023.jpg&embeds[]=https://iconparkorlando.com/bc/wp-content/uploads/The-Easter-Bunny-Garden-Experience-2023.jpg`,
+              target: `https://warpcast.com/~/compose?text=Helloworld&embeds[]=https://iconparkorlando.com/bc/wp-content/uploads/The-Easter-Bunny-Garden-Experience-2023.jpg`,
             },
           ],
           image: {
