@@ -8,7 +8,6 @@ import { NextResponse } from "next/server";
 import { generateImage } from "../lib/generate-image";
 import { saveImage } from "../lib/save-image";
 import { generateFinalPrompt } from "../lib/generate-prompt";
-import { addCast } from "../lib/add-cast";
 
 export async function getResponse(
   body: FrameRequest,
@@ -163,11 +162,12 @@ export async function getResponse(
       getFrameHtmlResponse({
         buttons: [
           {
+            action: "link",
             label: `Cast`,
             target: "https://warpcast.com/~/compose?text=Hello%20world!",
           },
         ],
-        input: { text: "Write a notes." },
+        input: { text: "Write a message." },
         image: {
           src: imageUrl,
         },
@@ -176,37 +176,6 @@ export async function getResponse(
         },
       })
     );
-  } else if (index == num + 4) {
-    const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
-    const imgUrl = state.imgUrl;
-    const msg = state.msg;
-    const fid: number = message?.interactor.fid!;
-    console.log("fid", fid);
-    //share on warpcast
-    addCast();
-
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Bearer ${process.env.PINATA_API_KEY}`,
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: `{"castAddBody":{"text":"${msg}","parentUrl":${process.env.PARENT_URL},"embeds":[{"url":"<string>","castId":{"fid":123,"hash":"<string>"}}],,"mentions":[123],"mentionsPositions":[],"parentCastId":{"fid":${process.env.FID}}},"signerId":${process.env.PRIVATE_KEY}}`,
-    // };
-
-    // fetch("https://api.pinata.cloud/v3/farcaster/casts", options)
-    //   .then((response) => response.json())
-    //   .then((response) => console.log(response))
-    //   .catch((err) => console.error(err));
-
-    const title = "Thanks for your cast!";
-    const data: any = {
-      image: {
-        src: `${process.env.SITE_URL}/og?title=${encodeURI(title)}`,
-      },
-      state: {},
-    };
-    return new NextResponse(getFrameHtmlResponse(data));
   } else {
     return new NextResponse(JSON.stringify({ error: "Unexpected error" }), {
       status: 500,
