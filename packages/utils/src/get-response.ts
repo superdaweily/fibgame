@@ -158,13 +158,15 @@ export async function getResponse(
       });
     }
   } else if (index == num + 3) {
+    const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
+    const imgUrl = state.imgUrl;
     return new NextResponse(
       getFrameHtmlResponse({
         buttons: [
           {
             action: "link",
             label: `Cast`,
-            target: "https://warpcast.com/~/compose?text=Hello%20world!",
+            target: `https://warpcast.com/~/compose?text=${message?.input}!&embeds[]=${imgUrl}`,
           },
         ],
         input: { text: "Write a message." },
