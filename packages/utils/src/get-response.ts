@@ -166,7 +166,7 @@ export async function getResponse(
           {
             action: "link",
             label: `Cast`,
-            target: `https://warpcast.com/~/compose?text=${message?.input}!&embeds[]=${imgUrl}`,
+            target: `https://warpcast.com/~/compose?text=${message?.input + " " + imageUrl}`,
           },
         ],
         input: { text: "Write a message." },
