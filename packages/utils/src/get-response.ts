@@ -137,18 +137,13 @@ export async function getResponse(
         getFrameHtmlResponse({
           buttons: [
             {
+              action: "link",
               label: `Share on Warpcast`,
+              target: `https://warpcast.com/~/compose?text=${imageUrl}&embeds[]=https://iconparkorlando.com/bc/wp-content/uploads/The-Easter-Bunny-Garden-Experience-2023.jpg`,
             },
           ],
           image: {
             src: `${process.env.SITE_URL}/og?title=${finalThumbnailText}`,
-          },
-          postUrl: `${
-            process.env.SITE_URL
-          }/api/generate?title=${finalThumbnailText}&questionIndex=${index + 1}&questionNum=${num}&imgUrl=${encodeURI(imgUrl)}`,
-          state: {
-            msg: message?.input,
-            imgUrl: imgUrl,
           },
         })
       );
@@ -157,27 +152,6 @@ export async function getResponse(
         status: 500,
       });
     }
-  } else if (index == num + 3) {
-    const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
-    const msg = state?.msg;
-    return new NextResponse(
-      getFrameHtmlResponse({
-        buttons: [
-          {
-            action: "link",
-            label: `Cast`,
-            target: `https://warpcast.com/~/compose?text=${msg}&embeds[]=${imageUrl}`,
-          },
-        ],
-        input: { text: "Write a message." },
-        image: {
-          src: imageUrl,
-        },
-        state: {
-          msg: message?.input,
-        },
-      })
-    );
   } else {
     return new NextResponse(JSON.stringify({ error: "Unexpected error" }), {
       status: 500,
