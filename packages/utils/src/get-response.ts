@@ -159,14 +159,14 @@ export async function getResponse(
     }
   } else if (index == num + 3) {
     const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
-    const imgUrl = state.imgUrl;
+    const msg = state?.msg;
     return new NextResponse(
       getFrameHtmlResponse({
         buttons: [
           {
             action: "link",
             label: `Cast`,
-            target: `https://warpcast.com/~/compose?text=${message?.input + " " + imageUrl}`,
+            target: `https://warpcast.com/~/compose?text=${msg}&embeds[]=${imageUrl}`,
           },
         ],
         input: { text: "Write a message." },
