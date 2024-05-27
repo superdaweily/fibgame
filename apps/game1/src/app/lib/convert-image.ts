@@ -8,11 +8,11 @@ export async function convertAndSaveImage(imageUrl: string) {
     const response = await fetch(imageUrl);
     const imageData = await response.arrayBuffer();
     const jpgData = await sharp(imageData).toFormat("jpeg").toBuffer();
-    const outputPath = `./public/images/${Date.now()}.jpg`;
+    const outputPath = `./apps/game1/public/images/${Date.now()}.jpg`;
     fs.writeFileSync(outputPath, jpgData);
     const fullUrl = join(
-      process.env.SITE_URL!,
-      outputPath.replace("./public", "")
+      process.env.BASE_SITE_URL!,
+      outputPath.replace("./apps/game1/public", "")
     );
     return { url: fullUrl };
   } catch (error) {
