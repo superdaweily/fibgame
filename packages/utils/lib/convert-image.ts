@@ -16,7 +16,7 @@ export const convertAndSaveImage = async (imageUrl: string) => {
     fs.writeFileSync(outputPath, jpgData);
 
     // Return the URL of the saved JPG image
-    return { url: `${process.env.NEXT_PUBLIC_SITE_URL}/${outputPath}` };
+    return { url: `${process.env.BASE_SITE_URL}/${outputPath}` };
   } catch (error) {
     console.error("Error converting and saving image:", error);
     return null;

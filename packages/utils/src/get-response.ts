@@ -131,7 +131,7 @@ export async function getResponse(
     // save image step
     const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
     const imgUrl = state.imgUrl;
-    const jpgImage = await convertAndSaveImage(imgUrl);
+    const jpgImage = (await convertAndSaveImage(imgUrl)) as any;
     const fid = message?.interactor.fid;
     const res_pinna: any = await saveImage(imgUrl, fid);
     if (res_pinna.msg == "Success") {
@@ -141,7 +141,7 @@ export async function getResponse(
             {
               action: "link",
               label: `Share on Warpcast`,
-              target: `https://warpcast.com/~/compose?text=${jpgImage}`,
+              target: `https://warpcast.com/~/compose?text=${jpgImage.url}`,
             },
           ],
           image: {
