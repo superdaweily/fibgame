@@ -6,17 +6,22 @@ export const convertAndSaveImage = async (imageUrl: string) => {
   try {
     // Fetch the image from the provided URL
     const response = await fetch(imageUrl);
-    const imageData = await response.buffer();
+    const imageBuffer = await response.buffer();
 
-    // Convert the fetched image data from JPEG to JPG format using Jimp
-    const image = await Jimp.read(imageData);
+    // Load the image using Jimp
+    const image = await Jimp.read(imageBuffer);
+
+    // Convert the image to JPEG format
+    const jpgImage = await image.quality(100).getBufferAsync(Jimp.MIME_JPEG);
+
+    // Save the converted JPEG image data to the backend (Next.js public directory)
     const outputPath = `./public/images/${Date.now()}.jpg`;
+    fs.writeFileSync(outputPath, jpgImage);
 
-    // Save the converted JPG image data to the backend (Next.js public directory)
-    await image.writeAsync(outputPath);
-
-    // Return the URL of the saved JPG image
-    return { url: `${process.env.BASE_SITE_URL}/${outputPath}` };
+    // Return the URL of the saved JPEG image
+    return {
+      url: `${process.env.SITE_URL}/${outputPath.replace("./public/", "")}`,
+    };
   } catch (error) {
     console.error("Error converting and saving image:", error);
     return null;
