@@ -30,7 +30,6 @@ export async function POST(req: NextRequest) {
             target: `https://warpcast.com/~/compose?text=${placeholder}%0A${jpgImage.url}`,
           },
         ],
-        input: { text: "Describe something.." },
         image: {
           src: `${process.env.SITE_URL}/og?title=${finalThumbnailText}`,
         },
