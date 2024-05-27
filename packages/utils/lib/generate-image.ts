@@ -12,7 +12,6 @@ export const generateImage = async (prompt: string) => {
         first_stage_steps: "30",
         second_stage_steps: "10",
         guidance_scale: "9",
-        sync_mode: true,
         image_size: "square_hd",
       },
     })) as any;
