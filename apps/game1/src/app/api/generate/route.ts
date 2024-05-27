@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import { FrameRequest } from "@coinbase/onchainkit/frame";
 import { getResponse } from "@repo/utils/getResponse";
 
-export const maxDuration = 300;
+export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 
 const questionIndex = 0;
