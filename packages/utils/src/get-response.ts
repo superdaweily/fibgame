@@ -6,7 +6,6 @@ import {
 
 import { NextResponse } from "next/server";
 import { generateImage } from "../lib/generate-image";
-import { saveImage } from "../lib/save-image";
 import { generateFinalPrompt } from "../lib/generate-prompt";
 
 export async function getResponse(

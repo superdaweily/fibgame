@@ -6,7 +6,7 @@ export async function convertAndSaveImage(imageUrl: string) {
     const response = await fetch(imageUrl);
     let fileBuffer;
     if (response.ok) {
-      fileBuffer = await response.buffer(); // Ensure we await this to get the buffer
+      fileBuffer = await response.buffer();
     } else {
       throw new Error("Failed to fetch the image");
     }
