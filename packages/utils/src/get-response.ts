@@ -8,7 +8,6 @@ import { NextResponse } from "next/server";
 import { generateImage } from "../lib/generate-image";
 import { saveImage } from "../lib/save-image";
 import { generateFinalPrompt } from "../lib/generate-prompt";
-import { convertAndSaveImage } from "../lib/convert-image";
 
 export async function getResponse(
   body: FrameRequest,
@@ -96,7 +95,6 @@ export async function getResponse(
     // generate image
     const keys = JSON.parse(decodeURIComponent(message?.state.serialized!));
     const finalPrompt = await generateFinalPrompt(prompt, keys);
-    console.log(finalPrompt);
     const fal_res = await generateImage(finalPrompt);
     if (fal_res.msg == "Success") {
       return new NextResponse(
@@ -110,9 +108,7 @@ export async function getResponse(
             src: `${fal_res.imageUrl}`,
             aspectRatio: "1:1",
           },
-          postUrl: `${
-            process.env.SITE_URL
-          }/api/generate?questionIndex=${index + 1}&questionNum=${num}`,
+          postUrl: `${process.env.SITE_URL}/api/send-cast`,
           state: {
             imgUrl: fal_res.imageUrl,
           },
@@ -124,34 +120,6 @@ export async function getResponse(
       });
     } else {
       return new NextResponse(JSON.stringify({ error: "Unexpected error" }), {
-        status: 500,
-      });
-    }
-  } else if (index == num + 2) {
-    // save image step
-    const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
-    const imgUrl = state.imgUrl;
-
-    const fid = message?.interactor.fid;
-    const res_pinna: any = await saveImage(imgUrl, fid);
-    const jpgImage = (await convertAndSaveImage(imgUrl)) as any;
-    if (res_pinna.msg == "Success") {
-      return new NextResponse(
-        getFrameHtmlResponse({
-          buttons: [
-            {
-              action: "link",
-              label: `Share on Warpcast`,
-              target: `https://warpcast.com/~/compose?text=${jpgImage.url}`,
-            },
-          ],
-          image: {
-            src: `${process.env.SITE_URL}/og?title=${finalThumbnailText}`,
-          },
-        })
-      );
-    } else {
-      return new NextResponse(JSON.stringify({ error: "Sever error" }), {
         status: 500,
       });
     }

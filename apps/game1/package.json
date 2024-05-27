@@ -14,12 +14,15 @@
     "@fal-ai/serverless-proxy": "^0.7.4",
     "@repo/ui": "*",
     "@repo/utils": "*",
+    "@types/sharp": "0.32.0",
     "autoprefixer": "^10.0.1",
     "frames.js": "^0.15.1",
     "next": "14.1.4",
+    "path": "^0.12.7",
     "postcss": "^8",
     "react": "^18",
     "react-dom": "^18",
+    "sharp": "^0.33.4",
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
