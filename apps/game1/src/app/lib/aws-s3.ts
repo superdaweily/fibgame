@@ -13,7 +13,7 @@ const bucketName = process.env.AWS_S3_BUCKET!;
 
 // Function to upload a file to S3
 export const s3Upload = async (fileBuffer: Buffer, fileName: string) => {
-  console.log("bucket:", bucketName);
+  console.log("Bucket:", bucketName);
   // Set up the parameters for the S3 upload
   const params: AWS.S3.PutObjectRequest = {
     Bucket: bucketName,

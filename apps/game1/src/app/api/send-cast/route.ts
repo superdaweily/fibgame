@@ -17,10 +17,10 @@ export async function POST(req: NextRequest) {
   const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
   const imageUrl = state.imgUrl;
   const fid = message?.interactor.fid;
-  console.log("imageUrl", imageUrl);
+  console.log("imageUrl:", imageUrl);
   const res_pinna: any = await saveImage(imageUrl, fid);
   const jpgImage: any = await convertAndSaveImage(imageUrl);
-  console.log("jpgImage", jpgImage.url);
+  console.log("jpgImage:", jpgImage.url);
   if (res_pinna.msg == "Success") {
     return new NextResponse(
       getFrameHtmlResponse({
