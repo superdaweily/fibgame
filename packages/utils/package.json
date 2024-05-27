@@ -7,7 +7,7 @@
     "./generate-image": "./lib/generate-image.ts",
     "./generate-prompt": "./lib/generate-prompt.ts",
     "./save-image": "./lib/save-image.ts",
-    "./add-cast": "./lib/add-cast.ts"
+    "./convert-image": "./lib/convert-image.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0"
