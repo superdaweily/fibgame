@@ -19,7 +19,6 @@ export async function POST(req: NextRequest) {
   const placeholder = "Describe something..";
   const fid = message?.interactor.fid;
   const res_pinna: any = await saveImage(imageUrl, fid);
-  const jpgImage: any = await convertAndSaveImage(imageUrl);
   if (res_pinna.msg == "Success") {
     return new NextResponse(
       getFrameHtmlResponse({
@@ -27,7 +26,7 @@ export async function POST(req: NextRequest) {
           {
             action: "link",
             label: `Share on Warpcast`,
-            target: `https://warpcast.com/~/compose?text=${placeholder}%0A${jpgImage.url}`,
+            target: `https://warpcast.com/~/compose?text=${placeholder}%0A${imageUrl}`,
           },
         ],
         image: {
