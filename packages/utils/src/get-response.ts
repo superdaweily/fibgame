@@ -101,7 +101,8 @@ export async function getResponse(
         getFrameHtmlResponse({
           buttons: [
             {
-              label: `Save`,
+              label: `Save image`,
+              action: "post",
             },
           ],
           image: {
@@ -114,10 +115,6 @@ export async function getResponse(
           },
         })
       );
-    } else if (!fal_res?.imageUrl) {
-      return new NextResponse(JSON.stringify({ error: "Server error" }), {
-        status: 500,
-      });
     } else {
       return new NextResponse(JSON.stringify({ error: "Unexpected error" }), {
         status: 500,

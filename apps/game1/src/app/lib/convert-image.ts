@@ -11,7 +11,7 @@ export async function convertAndSaveImage(imageUrl: string) {
     const outputPath = `./public/images/${Date.now()}.jpg`;
     fs.writeFileSync(outputPath, jpgData);
     const fullUrl = join(
-      process.env.BASE_SITE_URL!,
+      process.env.SITE_URL!,
       outputPath.replace("./public", "")
     );
     return { url: fullUrl };
