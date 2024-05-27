@@ -12,33 +12,13 @@ const s3 = new AWS.S3({
 });
 const bucketName = process.env.AWS_S3_BUCKET!;
 
-// Function to fetch user assets from S3
-export const fetchUserAssetFromS3 = async (fileName: string) => {
-  const key = `images/${fileName}`; // Assuming the image is stored in the "images/" directory
-
-  try {
-    // Generate a presigned URL for the image
-    const url = await s3.getSignedUrlPromise("getObject", {
-      Bucket: bucketName,
-      Key: key,
-      Expires: 3600, // URL expires in 1 hour, adjust as needed
-    });
-
-    return {
-      url: url, // Presigned URL
-    };
-  } catch (error) {
-    console.error("Error fetching the asset from S3:", error);
-    throw new Error("Failed to fetch the asset");
-  }
-};
 // Function to upload a file to S3
-export const s3Upload = async (imageData: Buffer, fileName: string) => {
+export const s3Upload = async (fileBuffer: Buffer, fileName: string) => {
   // Set up the parameters for the S3 upload
   const params: AWS.S3.PutObjectRequest = {
     Bucket: bucketName,
     Key: `images/${fileName}`, // Constructing the file key
-    Body: imageData,
+    Body: fileBuffer,
     ContentType: "image/jpeg",
   };
 
@@ -47,7 +27,8 @@ export const s3Upload = async (imageData: Buffer, fileName: string) => {
     const response = await s3.upload(params).promise();
 
     return {
-      url: response.Location, // URL of the uploaded file
+      url: response.Location,
+      key: response.Key,
     };
   } catch (error) {
     console.error("Error uploading file to S3:", error);
