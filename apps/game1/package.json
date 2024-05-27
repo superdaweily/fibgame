@@ -16,6 +16,7 @@
     "@repo/utils": "*",
     "@types/sharp": "0.32.0",
     "autoprefixer": "^10.0.1",
+    "aws-sdk": "^2.1628.0",
     "frames.js": "^0.15.1",
     "next": "14.1.4",
     "path": "^0.12.7",
