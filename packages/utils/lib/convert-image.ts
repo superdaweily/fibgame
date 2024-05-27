@@ -15,12 +15,12 @@ export const convertAndSaveImage = async (imageUrl: string) => {
     const jpgImage = await image.quality(100).getBufferAsync(Jimp.MIME_JPEG);
 
     // Save the converted JPEG image data to the backend (Next.js public directory)
-    const outputPath = `./public/images/${Date.now()}.jpg`;
+    const outputPath = `./apps/game1/public/images/${Date.now()}.jpg`;
     fs.writeFileSync(outputPath, jpgImage);
 
     // Return the URL of the saved JPEG image
     return {
-      url: `${process.env.SITE_URL}/${outputPath.replace("./public/", "")}`,
+      url: `${process.env.SITE_URL}/${outputPath.replace("./apps/game1/", "")}`,
     };
   } catch (error) {
     console.error("Error converting and saving image:", error);

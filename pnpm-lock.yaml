@@ -216,6 +216,9 @@ importers:
       '@noble/hashes':
         specifier: ^1.4.0
         version: 1.4.0
+      '@types/jimp':
+        specifier: 0.2.28
+        version: 0.2.28
       jimp:
         specifier: ^0.22.12
         version: 0.22.12
@@ -1540,6 +1543,15 @@ packages:
       '@types/through': 0.0.33
       rxjs: 6.6.7
     dev: true
+
+  /@types/jimp@0.2.28:
+    resolution: {integrity: sha512-nLIVbImtcaEf90y2XQsMzfgWK5EZxfDg6EVWobrkFTFJiLqmx/yU5Jh+LYUN94ztzXX1GwQLFYHaEi8tfMeZzw==}
+    deprecated: This is a stub types definition for jimp (https://github.com/oliver-moran/jimp#readme). jimp provides its own type definitions, so you don't need @types/jimp installed!
+    dependencies:
+      jimp: 0.22.12
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
