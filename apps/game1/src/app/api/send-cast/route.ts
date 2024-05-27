@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   });
   const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
   const imageUrl = state.imgUrl;
-  const content = state.content;
+  const placeholder = "Describe something..";
   const fid = message?.interactor.fid;
   const res_pinna: any = await saveImage(imageUrl, fid);
   const jpgImage: any = await convertAndSaveImage(imageUrl);
@@ -27,9 +27,10 @@ export async function POST(req: NextRequest) {
           {
             action: "link",
             label: `Share on Warpcast`,
-            target: `https://warpcast.com/~/compose?text=${content}%0A${jpgImage.url}`,
+            target: `https://warpcast.com/~/compose?text=${placeholder}%0A${jpgImage.url}`,
           },
         ],
+        input: { text: "Describe something.." },
         image: {
           src: `${process.env.SITE_URL}/og?title=${finalThumbnailText}`,
         },
