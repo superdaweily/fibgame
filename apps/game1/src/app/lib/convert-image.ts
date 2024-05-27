@@ -12,7 +12,7 @@ export async function convertAndSaveImage(imageUrl: string) {
     }
 
     const fileName = `image-${Date.now()}.jpg`;
-    const s3Image = await s3Upload(fileBuffer!, fileName);
+    const s3Image = await s3Upload(fileBuffer!, fileName!);
 
     return { url: s3Image.url };
   } catch (error) {

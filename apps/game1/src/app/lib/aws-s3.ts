@@ -7,13 +7,13 @@ const s3 = new AWS.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
   region: process.env.AWS_REGION!,
   s3ForcePathStyle: true,
-  // endpoint: "https://s3.amazonaws.com",
   signatureVersion: "v4",
 });
 const bucketName = process.env.AWS_S3_BUCKET!;
 
 // Function to upload a file to S3
 export const s3Upload = async (fileBuffer: Buffer, fileName: string) => {
+  console.log("bucket:", bucketName);
   // Set up the parameters for the S3 upload
   const params: AWS.S3.PutObjectRequest = {
     Bucket: bucketName,
@@ -28,7 +28,6 @@ export const s3Upload = async (fileBuffer: Buffer, fileName: string) => {
 
     return {
       url: response.Location,
-      key: response.Key,
     };
   } catch (error) {
     console.error("Error uploading file to S3:", error);
