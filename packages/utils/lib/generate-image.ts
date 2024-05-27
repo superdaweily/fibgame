@@ -14,7 +14,7 @@ export const generateImage = async (prompt: string) => {
         guidance_scale: "9",
         sync_mode: true,
         image_size: "square_hd",
-        content_type: "image/jpg",
+        image_type: "image/jpg",
       },
     })) as any;
 

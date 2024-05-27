@@ -6,5 +6,5 @@ export const generateFinalPrompt = async (prompt: string, keys: any) => {
       keys[index]
     );
   }
-  return finalPrompt;
+  return finalPrompt + ", make it jpg format";
 };
