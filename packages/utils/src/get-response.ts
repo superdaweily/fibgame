@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 import { generateImage } from "../lib/generate-image";
 import { saveImage } from "../lib/save-image";
 import { generateFinalPrompt } from "../lib/generate-prompt";
+import convertAndSaveImage from "../lib/convert-image";
 
 export async function getResponse(
   body: FrameRequest,
@@ -130,6 +131,7 @@ export async function getResponse(
     // save image step
     const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
     const imgUrl = state.imgUrl;
+    const jpgImage = await convertAndSaveImage(imgUrl);
     const fid = message?.interactor.fid;
     const res_pinna: any = await saveImage(imgUrl, fid);
     if (res_pinna.msg == "Success") {
@@ -139,7 +141,7 @@ export async function getResponse(
             {
               action: "link",
               label: `Share on Warpcast`,
-              target: `https://warpcast.com/~/compose?text=${imgUrl}`,
+              target: `https://warpcast.com/~/compose?text=${jpgImage}`,
             },
           ],
           image: {
