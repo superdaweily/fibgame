@@ -104,6 +104,7 @@ export async function getResponse(
               action: "post",
             },
           ],
+          input: { text: "Describe something.." },
           image: {
             src: `${fal_res.imageUrl}`,
             aspectRatio: "1:1",
@@ -111,6 +112,7 @@ export async function getResponse(
           postUrl: `${process.env.SITE_URL}/api/send-cast`,
           state: {
             imgUrl: fal_res.imageUrl,
+            content: message?.input,
           },
         })
       );
