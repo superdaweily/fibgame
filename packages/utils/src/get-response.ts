@@ -7,6 +7,7 @@ import {
 import { NextResponse } from "next/server";
 import { generateImage } from "../lib/generate-image";
 import { generateFinalPrompt } from "../lib/generate-prompt";
+import { saveImage } from "../lib/save-image";
 
 export async function getResponse(
   body: FrameRequest,
@@ -18,7 +19,7 @@ export async function getResponse(
   prompt: string
 ): Promise<NextResponse> {
   const allowFramegear = process.env.NODE_ENV !== "production";
-  const { isValid, message } = await getFrameMessage(body, {
+  const { message } = await getFrameMessage(body, {
     allowFramegear,
   });
   const index: number = searchParams.has("questionIndex")
@@ -108,7 +109,7 @@ export async function getResponse(
             src: `${fal_res.imageUrl}`,
             aspectRatio: "1:1",
           },
-          postUrl: `${process.env.SITE_URL}/api/send-cast`,
+          postUrl: `${process.env.SITE_URL}/api/generate?questionIndex=${index + 1}&questionNum=${num}`,
           state: {
             imgUrl: fal_res.imageUrl,
           },
@@ -116,6 +117,32 @@ export async function getResponse(
       );
     } else {
       return new NextResponse(JSON.stringify({ error: "Unexpected error" }), {
+        status: 500,
+      });
+    }
+  } else if (index == num + 2) {
+    const state = JSON.parse(decodeURIComponent(message?.state.serialized!));
+    const imageUrl = state.imgUrl;
+    const placeholder = "Describe something..";
+    const fid = message?.interactor.fid;
+    const res_pinna: any = await saveImage(imageUrl, fid);
+    if (res_pinna.msg == "Success") {
+      return new NextResponse(
+        getFrameHtmlResponse({
+          buttons: [
+            {
+              action: "link",
+              label: `Share on Warpcast`,
+              target: `https://warpcast.com/~/compose?text=${placeholder}&embeds[]=${imageUrl}`,
+            },
+          ],
+          image: {
+            src: `${process.env.SITE_URL}/og?title=${finalThumbnailText}`,
+          },
+        })
+      );
+    } else {
+      return new NextResponse(JSON.stringify({ error: "Sever error" }), {
         status: 500,
       });
     }
